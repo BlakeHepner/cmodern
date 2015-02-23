@@ -1,20 +1,25 @@
 #include <stdio.h>
 
-int total, twentybill, tenbill, fivebill, onebill;
+void pay_amount(int, int *, int *, int *, int *);
 
 int main(void)
 {
+  int dollars, twenties, tens, fives, ones;
   printf("Enter a dollar amount: ");
-  scanf("%d", &total);
-  twentybill = total / 20;
-  tenbill = (total - (twentybill * 20)) / 10;
-  fivebill = (total - (twentybill * 20) - (tenbill * 10)) / 5;
-  onebill = (total - (twentybill * 20) - (tenbill * 10) - (fivebill * 5)) / 1;
+  scanf("%d", &dollars);
+  pay_amount(dollars, &twenties, &tens, &fives, &ones);
   printf("\n");
-  printf("$20 bills: %d\n", twentybill);
-  printf("$10 bills: %d\n", tenbill);
-  printf(" $5 bills: %d\n", fivebill);
-  printf(" $1 bills: %d\n", onebill);
+  printf("$20 bills: %d\n", twenties);
+  printf("$10 bills: %d\n", tens);
+  printf(" $5 bills: %d\n", fives);
+  printf(" $1 bills: %d\n", ones);
   return 0;
 }
 
+void pay_amount(int dollars, int *twenties, int *tens, int*fives, int *ones)
+{
+  *twenties = dollars / 20;
+  *tens = (dollars - (*twenties * 20)) / 10;
+  *fives = (dollars - (*twenties * 20) - (*tens * 10)) / 5;
+  *ones = (dollars - (*twenties * 20) - (*tens * 10) - (*fives * 5)) / 1;
+}

@@ -16,7 +16,7 @@ int main(void)
   }
   
   printf("Reversal is: ");
-  for (pointer = input + MAX_CHAR - 1; pointer >= input; pointer--)
+  for (; pointer >= input; pointer--)
     putchar(*pointer);
   
   printf("\n");

@@ -4,20 +4,20 @@
 
 int main(void)
 {
-  int i;
+  char *pointer;
   char ch;
   char input[MAX_CHAR];
   
   printf("Enter a message: ");
-  for (i = 0; i < MAX_CHAR; i++)
+  for (pointer = input; pointer < input + MAX_CHAR; pointer++)
   {
     if ((ch = getchar()) == '\n') break;
-    input[i] = ch;
+    *pointer = ch;
   }
   
   printf("Reversal is: ");
-  for (; i > 0; i--)
-    putchar(input[i - 1]);
+  for (pointer = input + MAX_CHAR - 1; pointer >= input; pointer--)
+    putchar(*pointer);
   
   printf("\n");
   return 0;

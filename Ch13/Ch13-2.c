@@ -26,6 +26,11 @@ int main(int argc, char *argv[])
     scanf("%2d", &day);
     if (day == 0)
       break;
+    if (day > 31 || day < 0)
+    {
+      printf("Error! You entered an invalid day of the month, you entered: %d", day);
+      continue;
+    }
     sprintf(day_str, "%2d", day);
     read_line(msg_str, MSG_LEN);
     

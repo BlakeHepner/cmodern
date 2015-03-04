@@ -1,16 +1,33 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#define MAX_WORD_LENGTH 20
+
+int compute_scrabble_value(const char *word);
+
 int main(void)
 {
-  int sum = 0; //holds total score
-  char ch; //holds user input
+  int score;//holds total score
+  char word[MAX_WORD_LENGTH];
   
   printf("Enter a word: ");
+  scanf("%s", word);
   
-  while ((ch = getchar()) != '\n')
+  score = compute_scrabble_value(word);
+
+  printf("Scrabble value of %s is: %d\n", word, score);
+  return 0;
+}
+
+int compute_scrabble_value(const char *word)
+{
+  int sum = 0;
+  for(int i = 0; i < MAX_WORD_LENGTH; i++)
+  {
+    if (isalpha(word[i]))
     {
-      switch (toupper(ch)) {
+      switch (toupper(word[i]))
+      {
         case 'D':
         case 'G': sum += 2; break;
         case 'B':
@@ -30,6 +47,6 @@ int main(void)
         default: sum += 1; break;
       }
     }
-  printf("Scrabble value: %d\n", sum);
-  return 0;
+  }
+  return sum;
 }

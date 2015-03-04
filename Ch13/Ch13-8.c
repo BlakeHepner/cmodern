@@ -15,7 +15,7 @@ int main(void)
   
   score = compute_scrabble_value(word);
 
-  printf("Scrabble value of %s is: %d\n", word, score);
+  printf("Scrabble value is: %d\n", score);
   return 0;
 }
 

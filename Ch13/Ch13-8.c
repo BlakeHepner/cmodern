@@ -8,10 +8,10 @@ int compute_scrabble_value(const char *word);
 int main(void)
 {
   int score;//holds total score
-  char word[MAX_WORD_LENGTH];
+  char word[MAX_WORD_LENGTH + 1];
   
   printf("Enter a word: ");
-  scanf("%s", word);
+  fgets(word, MAX_WORD_LENGTH + 1, stdin);
   
   score = compute_scrabble_value(word);
 

@@ -2,22 +2,39 @@
 
 #define MAX_MSG 80
 
+void encrypt(char *message, int shift);
+
 int main(void)
 {
   char message[MAX_MSG];
-  int msglength, shift;
+  int shift;
   
   printf("Enter message to be encrypted: ");
-  for (msglength = 0; msglength < MAX_MSG; msglength++)
-  {
-    if ((message[msglength] = getchar()) == '\n') break;
-  }
+  fgets(message, MAX_MSG, stdin);
   
   printf("Enter shift amount (1-25): ");
   scanf("%d", &shift);
+  encrypt(message, shift);
+  printf("Encrypted message: %s\n", message);
+}
+
+void encrypt(char *message, int shift)
+{
+  for (; *message != '\0'; message++)
+  {
+    if (*message >= 'A' && *message <= 'Z')
+      *message = ((*message - 'A' + shift) % 26 + 'A');
+    else if (*message >= 'a' && *message <= 'z')
+      *message = ((*message - 'a' + shift) % 26 + 'a');
+    else if (*message == '\n')
+    {
+      *message = '\0';
+      break;
+    }
+  }
   
-  printf("Encrypted message: ");
   
+  /*
   for (int i = 0; i < msglength; i++)
   {
     if (message[i] >= 'A' && message[i] <= 'Z')
@@ -29,5 +46,5 @@ int main(void)
     else //if any other type of character
       putchar(message[i]);
   }
-  printf("\n");
+  */
 }

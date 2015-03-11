@@ -12,29 +12,9 @@ int main(void)
   
   printf("Enter first word: ");
   fgets(word1, MAX_INPUT_LENGTH, stdin);
-  /*while ((ch = getchar()) != '\n')
-  {
-    if (isalpha(ch))
-    {
-      ch = tolower(ch);
-      alphabet[(ch - 'a')] += 1;
-    }
-    else
-      printf("Warning: Non-alpha characters are not accounted for!\n");
-  }*/
   
   printf("Enter second word: ");
   fgets(word2, MAX_INPUT_LENGTH, stdin);
-  /*while((ch = getchar()) != '\n')
-  {
-    if (isalpha(ch))
-    {
-      ch = tolower(ch);
-      alphabet[(ch - 'a')] -= 1;
-    }
-    else
-      printf("Warning: Non-alpha characters are not accounted for!\n");
-  }*/
   
   if (are_anagrams(word1, word2))
   {

@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdbool.h>
+
+#define MAX_INPUT_LENGTH 80
+
+bool are_anagrams(const char *word1, const char *word2);
 
 int main(void)
 {
-  int alphabet[26] = { 0 };
-  char ch;
+  char word1[MAX_INPUT_LENGTH] = {0}, word2[MAX_INPUT_LENGTH] = {0};
   
   printf("Enter first word: ");
-  while ((ch = getchar()) != '\n')
+  fgets(word1, MAX_INPUT_LENGTH, stdin);
+  /*while ((ch = getchar()) != '\n')
   {
     if (isalpha(ch))
     {
@@ -16,10 +21,11 @@ int main(void)
     }
     else
       printf("Warning: Non-alpha characters are not accounted for!\n");
-  }
+  }*/
   
   printf("Enter second word: ");
-  while((ch = getchar()) != '\n')
+  fgets(word2, MAX_INPUT_LENGTH, stdin);
+  /*while((ch = getchar()) != '\n')
   {
     if (isalpha(ch))
     {
@@ -28,16 +34,36 @@ int main(void)
     }
     else
       printf("Warning: Non-alpha characters are not accounted for!\n");
+  }*/
+  
+  if (are_anagrams(word1, word2))
+  {
+    printf("The words are anagrams.\n");
+    return 0;
+  }
+  else
+  {
+    printf("The words are not anagrams.\n");
+    return 1;
+  }
+  return 2;
+}
+
+bool are_anagrams(const char *word1, const char *word2)
+{
+  int alphabet[26] = {0};
+  
+  for (int i = 0; i < MAX_INPUT_LENGTH; i++)
+  {
+    if (isalpha(word1[i]))
+      alphabet[(tolower(word1[i]) - 'a')] -= 1;
+    if (isalpha(word2[i]))
+      alphabet[(tolower(word2[i]) - 'a')] += 1;
   }
   
-  for(int i = 0; i < 26; i++)
+  for (int m = 0; m < 26; m++)
   {
-    if (alphabet[i] != 0)
-    {
-      printf("The words are not anagrams.\n");
-      return 1;
-    }
+    if (alphabet[m] != 0) return false;
   }
-  printf("The words are anagrams.\n");
-  return 0;
+  return true;
 }

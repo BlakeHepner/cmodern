@@ -14,7 +14,7 @@ int main(void)
   clear_line();
   for (;;)
   {
-    read_word(word, MAX_WORD_LE + 1);
+    read_word(word, MAX_WORD_LEN + 1);
     word_len = strlen(word);
     if (word_len == 0)
     {

@@ -12,7 +12,7 @@ void clear_line(void);
  *            puts one space before word.                 *
  **********************************************************/
 
-void add_word(const *char word);
+void add_word(const char *word);
 
 /**********************************************************
  * space_remaining: Returns the number of characters left *

@@ -35,7 +35,7 @@ int space_remaining(void)
 
 void write_line(void)
 {
-  int extra spaces, spaces_to_insert, i, j;
+  int extra_spaces, spaces_to_insert, i, j;
   
   extra_spaces = MAX_LINE_LEN - line_len;
   for (i = 0; i < line_len; i++)
@@ -55,7 +55,7 @@ void write_line(void)
       num_words--;
     }
   }
-  put_char('\n');
+  putchar('\n');
 }
 
 void flush_line(void)

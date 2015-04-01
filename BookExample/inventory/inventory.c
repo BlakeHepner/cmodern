@@ -120,7 +120,7 @@ void search(void)
   i = find_part(number);
   if (i >= 0)
   {
-    printf("Part name: %s\n", inventory[i].name)
+    printf("Part name: %s\n", inventory[i].name);
     printf("Quantity on hand: %d\n", inventory[i].on_hand);
   }
   else
@@ -147,7 +147,7 @@ void update(void)
   if (i >= 0)
   {
     printf("Enter change in quantity on hand: ");
-    scanf("%d"), &change);
+    scanf("%d", &change);
     inventory[i].on_hand += change;
   }
   else

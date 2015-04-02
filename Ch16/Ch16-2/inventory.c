@@ -160,21 +160,20 @@ void update(void)
 /************************************************************
  * print: Prints a listing of all parts in the database,    *
  *        showing the part number, part name, and           *
- *        quantity on hand. Parts are printed in the        *
- *        order in which they were entered into the         *
- *        database.                                         *
+ *        quantity on hand. Parts are printed sorted by     *
+ *        part number, sorting is handled by quicksort.     *
  ************************************************************/
  
 void print(void)
 {
-  int sortarray[MAX_PARTS];
+  int sortarray[MAX_PARTS] = { 0 };
   for(int i = 0; i < num_parts; i++)
     sortarray[i] = inventory[i].number;
   
-  quicksort(sortarray, 0, num_parts);
+  quicksort(sortarray, 0, num_parts -1);
   
   for(int i = 0; i < num_parts; i++)
-    sortarray[i] = find_part(i);
+    sortarray[i] = find_part(sortarray[i]);
   
   printf("Part Number   Part Name               Quantity on Hand\n");
   for(int i = 0; i < num_parts; i++)

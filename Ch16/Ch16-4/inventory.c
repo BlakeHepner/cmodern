@@ -10,6 +10,7 @@ struct part {
   int number;
   char name[NAME_LEN+1];
   int on_hand;
+  float price;
 } inventory[MAX_PARTS];
 
 int num_parts = 0; /* number of parts currently stored */
@@ -19,6 +20,7 @@ void insert(void);
 void search(void);
 void update(void);
 void print(void);
+void reprice(void);
 
 /************************************************************
  * main:  Prompts the user to enter an operation code,      *
@@ -44,6 +46,7 @@ int main(void)
       case 's': search(); break;
       case 'u': update(); break;
       case 'p': print(); break;
+      case 'r': reprice(); break;
       case 'q': return 0;
       default: printf("Illegal code\n");
     }
@@ -101,6 +104,8 @@ void insert(void)
   read_line(inventory[num_parts].name, NAME_LEN);
   printf("Enter quantity on hand: ");
   scanf("%d", &inventory[num_parts].on_hand);
+  printf("Enter price of item: ");
+  scanf("%f", &inventory[num_parts].price);
   num_parts++;
 }
 
@@ -122,6 +127,7 @@ void search(void)
   {
     printf("Part name: %s\n", inventory[i].name);
     printf("Quantity on hand: %d\n", inventory[i].on_hand);
+    printf("Price of item: %.2f\n", inventory[i].price);
   }
   else
   {
@@ -166,9 +172,34 @@ void update(void)
  
 void print(void)
 {
-  printf("Part Number   Part Name               Quantity on Hand\n");
+  printf("Part Number   Part Name               Quantity on Hand  Price\n");
   for(int i = 0; i <num_parts; i++)
   {
-    printf("%7d       %-25s%11d\n", inventory[i].number, inventory[i].name, inventory[i].on_hand);
+    printf("%7d       %-25s%11d      %.2f\n", inventory[i].number, inventory[i].name, inventory[i].on_hand, inventory[i].price);
+  }
+}
+
+/************************************************************
+ * reprice:	This function allows you to change to price			*
+ * 					of an item based upon part number.							*
+ ************************************************************/
+ 
+void reprice(void)
+{
+	int i, number;
+	float change;
+  
+  printf("Enter part number: ");
+  scanf("%d", &number);
+  i = find_part(number);
+  if (i >= 0)
+  {
+    printf("Enter new price: ");
+    scanf("%f", &change);
+    inventory[i].price = change;
+  }
+  else
+  {
+    printf("Part not found.\n");
   }
 }

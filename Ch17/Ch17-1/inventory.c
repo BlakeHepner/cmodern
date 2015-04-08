@@ -1,18 +1,21 @@
 /* Maintains a parts database (array version) */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "readline.h"
 
 #define NAME_LEN 25
-#define MAX_PARTS 100
+#define INITIAL_PARTS 10
 
 struct part {
   int number;
   char name[NAME_LEN+1];
   int on_hand;
-} inventory[MAX_PARTS];
+};
 
+struct part *inventory;
 int num_parts = 0; /* number of parts currently stored */
+int max_parts = INITIAL_PARTS; /* size of inventory array */
 
 int find_part(int number);
 void insert(void);
@@ -32,6 +35,13 @@ int main(void)
 {
   char code;
   
+  inventory = malloc(max_parts * sizeof(struct part));
+  if (inventory == NULL)
+  {
+    printf("Can't allocate initial inventory space.\n");
+	exit(EXIT_FAILURE);
+  }
+
   for (;;)
   {
     printf("Enter operation code: ");
@@ -80,11 +90,18 @@ int find_part(int number)
 void insert(void)
 {
   int part_number;
-  
-  if (num_parts == MAX_PARTS)
+  struct part *temp; 
+
+  if (num_parts == max_parts)
   {
-    printf("Database is full; can't add more parts.\n");
-    return;
+    max_parts *= 2;
+    temp = realloc(inventory, max_parts * sizeof(struct part));
+    if (temp == NULL)
+    {
+        printf("Insufficient memory; can't add more parts.\n");
+        return;
+    }
+    inventory = temp;
   }
   
   printf("Enter part number: ");

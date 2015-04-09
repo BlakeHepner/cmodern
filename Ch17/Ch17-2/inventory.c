@@ -22,6 +22,7 @@ void insert(void);
 void search(void);
 void update(void);
 void print(void);
+int compare_parts(const void *p, const void *q);
 
 /************************************************************
  * main:  Prompts the user to enter an operation code,      *
@@ -183,9 +184,15 @@ void update(void)
  
 void print(void)
 {
+  qsort(inventory, num_parts, sizeof(struct part), compare_parts);
   printf("Part Number   Part Name               Quantity on Hand\n");
   for(int i = 0; i <num_parts; i++)
   {
     printf("%7d       %-25s%11d\n", inventory[i].number, inventory[i].name, inventory[i].on_hand);
   }
+}
+
+int compare_parts(const void *p, const void *q)
+{
+    return((struct part *) p)->number - ((struct part *) q)->number;
 }

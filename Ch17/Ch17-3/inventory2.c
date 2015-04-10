@@ -20,6 +20,7 @@ void insert(void);
 void search(void);
 void update(void);
 void print(void);
+void erase(void);
 
 /************************************************************
  * main: Prompts the user to enter an operation code,       *
@@ -45,6 +46,7 @@ int main(void)
             case 'u': update(); break;
             case 'p': print(); break;
             case 'q': return 0;
+            case 'e': erase(); break;
             default: printf("Illegal code\n");
         }
         printf("\n");
@@ -180,3 +182,34 @@ void print(void)
                 p->on_hand);
 }
 
+/************************************************************
+ * erase: Uses the trailing pointer method to erase a part  *
+ *        from the database. Requires part number from the  *
+ *        user. Will call free() on linked list chunk       *
+ *        to free it.                                       *
+ ************************************************************/
+
+void erase(void)
+{
+   struct part *cur, *prev;
+   int n;
+
+   printf("Please enter a part number to delete: ");
+   scanf("%d", &n);
+   for (cur = inventory, prev = NULL;
+        cur != NULL && cur->number != n;
+        prev = cur, cur = cur->next)
+       ;
+
+   if (cur == NULL) {
+       printf("Part was not found.\n");
+       return;
+   }
+   if (prev == NULL) {  
+       inventory = inventory->next;
+   } else {
+       prev->next = cur->next;
+   }
+   free(cur);
+   printf("Part removed successfully.\n");
+}

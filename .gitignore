@@ -119,3 +119,11 @@ BookExample/inventory2/readline.o
 Ch17/Ch17-1/inventory
 Ch17/Ch17-1/inventory.o
 Ch17/Ch17-1/readline.o
+Ch17/Ch17-3/inventory2
+Ch17/Ch17-3/inventory2.o
+Ch17/Ch17-3/readline.o
+Ch17/Ch17-4/input.txt
+Ch17/Ch17-4/justify
+Ch17/Ch17-4/justify.o
+Ch17/Ch17-4/line.o
+Ch17/Ch17-4/word.o
